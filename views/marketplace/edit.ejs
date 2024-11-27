@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+<div class="content">
+    <div class="containerX">
+        <form method="POST" action="/items/<%= item.id %>?_method=PUT" class="new-form" enctype="multipart/form-data">
+
+            <label for="condition">Condition: </label>
+            <select id="condition" class="input" name="condition" required>
+                <option value="" disabled>--Select a Condition--</option>
+                <option value="Like-New" <%= item.condition === 'Like-New' ? 'selected' : '' %>>Like-New</option>
+                <option value="Used" <%= item.condition === 'Used' ? 'selected' : '' %>>Used</option>
+                <option value="Worn" <%= item.condition === 'Worn' ? 'selected' : '' %>>Worn</option>
+                <option value="Salvage" <%= item.condition === 'Salvage' ? 'selected' : '' %>>Salvage</option>
+                <option value="Partout" <%= item.condition === 'Partout' ? 'selected' : '' %>>Part-Out</option>
+            </select>
+
+            <label for="year">Year: </label>
+            <input id="year" class="input" name="year" type="number" value="<%= item.year %>" required>
+
+            <label for="make">Make: </label>
+            <input id="make" class="input" type="text" name="make" value="<%= item.make %>" required>
+
+            <label for="modelX">Model: </label>
+            <input id="modelX" class="input" type="text" name="modelX" value="<%= item.modelX %>" required>
+
+            <label for="price">Price: </label>
+            <input id="price" class="input" type="number" name="price" value="<%= item.price %>" required>
+
+            <label for="details">Description: </label>
+            <textarea rows="5" id="details" name="details" class="fixed-width" required><%= item.details %></textarea>
+
+            <label for="image">Image:</label>
+            <input id="image" type="file" name="image">
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class="existing-image">
+            <h4>Current Image:</h4>
+            <img src="<%= item.image %>" alt="Current item image" class="item-image-preview">
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>

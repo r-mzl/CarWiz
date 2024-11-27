@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs')%>
+<div class="content">
+    <% if(items.length) { %> 
+     <p class="marketplace-heading">The Marketplace</p>
+        <div class="item-grid">
+            <% items.forEach(item => { %>
+                <div class="item-tile">
+                    <a href="/items/<%= item.id %>">
+                        <div class="item-image">
+                            <img src="<%= item.image %>" alt="<%= item.make %> <%= item.modelX %>">
+                        </div>
+                        <div class="item-details">
+                            <p><%= item.year %> <%= item.make %> <%= item.modelX %></p>
+                            <p class="item-price">$<%= item.price %></p>
+                        </div>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p>There are no items to display.</p>
+    <% } %>
+</div>
+<%- include('../partials/footer.ejs')%>

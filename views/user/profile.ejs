@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+<div class="content">
+<div class="profile-container">
+    <h2>Welcome <%= user.firstName %> <%= user.lastName %></h2>
+    
+    <% if (items.length) { %>
+        <p>My Listings</p>
+        <div class="item-grid">
+            <% items.forEach(item => { %>
+                <div class="item-tile">
+                    <div class="item-details">
+                        <p><strong>Title:</strong> <%= item.year%> <%= item.make%> <%= item.modelX%></p>
+                        <p><strong>Status:</strong> <%= item.active ? "Active" : "Inactive" %></p>
+                        
+                        <div class="button-container">
+                            <a href="/items/<%= item._id %>" class="btn view-btn">View</a>
+                            <a href="/items/<%= item._id %>/edit" class="btn edit-btn">Edit</a>
+                            <form action="/items/<%= item._id %>?_method=DELETE" method="POST" class="inline-form">
+                                <button type="submit" class="btn delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>You have no listings</p>
+    <% } %>
+</div>
+</div>
+<%- include('../partials/footer.ejs') %>

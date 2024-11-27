@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs')%>
+<p class="marketplace-heading">Get Your Car Sold Today!</p>
+<div class = "content">
+    <form action = "/items" method = "POST" class="new-form" enctype="multipart/form-data">
+        <label for="condition">Condition: </label>
+        <select id="condition" name="condition" required>
+            <option value="" disabled selected>--Select a Condition--</option>
+            <option value="Like-New">Like-New</option>
+            <option value="Used">Used</option>
+            <option value="Worn">Worn</option>
+            <option value="Salvage">Salvage</option>
+            <option value="Partout">Part-Out</option>
+        </select>
+
+        <label for="year">Year: </label>
+        <input id="year" name="year" type="number" required>
+
+        <label for="make">Make: </label>
+        <input id="make" type="text" name="make" required>
+
+        <label for="modelX">Model: </label>
+        <input id="modelX" type="text" name="modelX" required>
+
+        <label for="price">Price: </label>
+        <input id="price" type="number" name="price" required>
+        
+        <label for="details">Description: </label>
+        <textarea rows="5" id="details" name="details" class = "fixed-width" required></textarea>
+        
+        <label for="image">Image:</label>
+        <input id="image" type="file" name="image" required>
+
+        <input type="submit" value="Submit">   
+    </form>
+
+    </div>
+    <%- include('../partials/footer.ejs')%>

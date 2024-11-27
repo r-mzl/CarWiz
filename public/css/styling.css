@@ -1,0 +1,265 @@
+.text-justify {
+    text-align: justify;
+}
+.center{
+    text-align: center;
+}
+
+.category{
+    font-weight: bold;
+    margin-top:20px;
+    margin-left:20px;
+}
+
+.events{
+    margin-left:40px;
+    margin-top:5px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+}
+
+.centerScreen{
+    padding-left:350px;
+    flex-grow: 1;
+    height:100%;
+}
+
+.buttonAdjust{
+    padding-left:675px;
+}
+
+.eventimg {
+    margin-right: 20px; 
+}
+
+.button-container button {
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+.label-container{
+    display:flex;
+    align-items:center;
+    margin: 20px;
+    gap: 50px;
+}
+
+.label{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.input{
+    padding:5px;
+    padding-right: 40px;
+    font-size:16px;
+}
+
+  
+.content {
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+
+.new-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    max-width: 600px;
+    padding: 1rem;
+}
+  
+.new-form input[type="submit"] {
+    width: 70px;
+    padding: 0.2em 0;
+    grid-column: 2/3;
+    justify-self: end;
+}
+
+.content {
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1; 
+}
+
+.item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.item-tile {
+    width: 210px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.item-tile:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.item-image img {
+    width: 100%;
+    height: 150px; 
+    object-fit: cover; 
+}
+
+.item-details {
+    padding: 10px;
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.marketplace-heading {
+    font-size: 36px; 
+    font-weight: 700; 
+    text-align: center; 
+    margin-bottom: 30px; 
+    color: #333; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    border-bottom: 2px solid #ddd; 
+    padding-bottom: 10px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.containerX {
+    /*max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 15px; */
+
+    display: flex;
+    gap: 20px;
+}
+
+footer {
+    background-color: #f8f9fa; 
+    color: #343a40; 
+}
+
+footer a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+footer a:hover {
+    text-decoration: underline; 
+}
+
+.item-image-preview {
+    width: 300px; 
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+
+.success {
+    background: rgba(108, 192, 112, 0.7);
+    color: #fff;
+    width: 70%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+  
+  }
+  
+  .error {
+    background: rgba(255, 102, 51, 0.7);
+    color: #fff;
+    width: 70%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  .profile-container {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-text {
+    font-size: 28px; 
+    color: #333; 
+    font-weight: bold; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-heading {
+    font-size: 22px;
+    color: #555;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    flex: 1; 
+    text-align: center;
+}
+
+.view-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: black;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
