@@ -13,5 +13,22 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "uuidv4": "^6.2.13"
-  }
+  },
+  "name": "maddikuntashashankproject5",
+  "version": "1.5.0",
+  "description": "Car marketplace and auction app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-mzl/CarWiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r-mzl/CarWiz/issues"
+  },
+  "homepage": "https://github.com/r-mzl/CarWiz#readme"
 }
