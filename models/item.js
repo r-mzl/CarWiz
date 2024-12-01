@@ -10,7 +10,8 @@ const itemSchema = new Schema({
     price: { type: Number, required: [true, 'Price is required'] },
     details: { type: String, required: [true, 'Details are required'] },
     image: { type: String }, 
-    active: { type: Boolean, default: true } 
+    active: { type: Boolean, default: true }, 
+    offers: [{ type: Schema.Types.ObjectId, ref: 'Offer' }]
 }, { timestamps: true }); 
 
 module.exports = mongoose.model('Item', itemSchema);
