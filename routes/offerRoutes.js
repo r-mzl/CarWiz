@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
+const {validateId} = require('../middleware/validator');
+const {isLoggedIn, isSeller} = require('../middleware/auth');
 const offerController = require('../controllers/offerController');
 
-router.post('/items/:id/offers', offerController.createOffer);
-router.get('/items/:id/offers', offerController.getOffersForItem);
-router.post('/offers/:id/accept', offerController.acceptOffer);
+router.post('/offers', isLoggedIn, validateId, offerController.createOffer);
+router.get('/offers', isLoggedIn, isSeller, validateId, offerController.getOffersForItem);
+router.post('/offers/:id/accept', isLoggedIn, isSeller, validateId, offerController.acceptOffer);
 
 module.exports = router;
 

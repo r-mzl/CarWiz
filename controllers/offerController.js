@@ -6,21 +6,26 @@ exports.createOffer = (req, res, next) => {
     let id = req.params.id;
     let amount = req.body.amount;
 
+    console.log('Logged in user:', req.user);
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         req.flash('error', 'Invalid item ID');
         return res.redirect('back');
     }
 
     Item.findById(id)
-        .populate('seller')
+        .populate('seller')  
         .then(item => {
+            console.log('Item found:', item);
+            console.log('Seller found:', item.seller);
+
             if (!item || !item.active) {
                 req.flash('error', 'Item not found or inactive');
                 return res.redirect('back');
             }
 
-            if (item.seller._id.toString() === req.user._id.toString()) {
-                req.flash('error', 'Cannot make an offer on your own item');
+            if (!item.seller) {
+                req.flash('error', 'Seller information is missing');
                 return res.redirect('back');
             }
 

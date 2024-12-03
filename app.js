@@ -10,7 +10,7 @@ const flash = require('connect-flash');
 
 const itemRoutes = require('./routes/itemRoutes');
 const userRoutes = require('./routes/userRoutes');
-//const offerRoutes = require('./routes/offerRoutes');
+const offerRoutes = require('./routes/offerRoutes');
 
 
 
@@ -68,6 +68,9 @@ app.get('/', (req, res)=>{
 app.use('/users', userRoutes);
 
 app.use('/items', itemRoutes);
+
+app.use('/items/:id', offerRoutes);
+//app.use('/', offerRoutes);
 
 
 //Error handling
