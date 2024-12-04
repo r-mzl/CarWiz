@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="content">
+    <div class="marketplace-heading">
+        <h2>Offers for <%= item.year %> <%= item.make %> <%= item.modelX %></h2>
+    </div>
+
+    <% if (item.offers.length > 0) { %>
+        <div class="item-grid">
+            <% item.offers.forEach(offer => { %>
+                <div class="item-tile">
+                    <div class="item-details">
+                        <p><strong>Bid Price:</strong> $<%= offer.amount %></p>
+                        <p><strong>Buyer:</strong> <%= offer.user.firstName %> <%= offer.user.lastName %></p> 
+                        <div class="button-container">
+                            <a href="/offers/<%= offer._id %>" class="btn view-btn">Accept</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>No offers available for this item.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer.ejs') %>
