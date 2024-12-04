@@ -6,8 +6,6 @@ exports.createOffer = (req, res, next) => {
     let id = req.params.id;
     let amount = req.body.amount;
 
-    console.log('Logged in user:', req.user);
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
         req.flash('error', 'Invalid item ID');
         return res.redirect('back');
@@ -16,9 +14,6 @@ exports.createOffer = (req, res, next) => {
     Item.findById(id)
         .populate('seller')  
         .then(item => {
-            console.log('Item found:', item);
-            console.log('Seller found:', item.seller);
-
             if (!item || !item.active) {
                 req.flash('error', 'Item not found or inactive');
                 return res.redirect('back');
@@ -33,10 +28,15 @@ exports.createOffer = (req, res, next) => {
             return offer.save().then(savedOffer => {
                 item.offers = item.offers || [];
                 item.offers.push(savedOffer._id);
-                return item.save().then(() => {
-                    req.flash('success', 'Offer made successfully');
-                    res.redirect(`/items/${id}`);
-                });
+                return item.updateOne(
+                    { 
+                        $inc: { totalOffers: 1 }, 
+                        $max: { highestOffer: amount } 
+                    })
+                    .then(() => {
+                        req.flash('success', 'Offer made successfully');
+                        res.redirect(`/items/${id}`);
+                    });
             });
         })
         .catch(err => next(err));

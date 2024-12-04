@@ -19,6 +19,13 @@
                 <p>Condition: <%= item.condition %></p>
                 <p>Price: $<%= item.price %></p>
                 <p>Details: <%= item.details %></p>
+
+                <!-- Display the total offers and highest offer if the item is active and has offers -->
+                <% if (item.active && item.totalOffers > 0) { %>
+                    <p><strong>Total Offers:</strong> <%= item.totalOffers %></p>
+                    <p><strong>Highest Offer:</strong> $<%= item.highestOffer %></p>
+                <% } %>
+
                 <% if (user == item.seller._id) { %>
                     <form>
                         <button type="submit" formmethod="GET" formaction="/items/<%= item.id %>/edit">Edit</button>

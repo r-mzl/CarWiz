@@ -71,6 +71,13 @@ exports.show = (req, res, next)=>{
     ItemModel.findById(id).populate('seller', 'firstName lastName')
     .then(item=>{
         if(item){
+            let totalOffers = 0;
+            let highestOffer = 0;
+
+            if (item.active && item.totalOffers > 0) {
+                totalOffers = item.totalOffers;
+                highestOffer = item.highestOffer;
+            }
             res.render('./marketplace/item', { item });
         } else {
             let err = new Error('Cannot find an item with id ' +id);

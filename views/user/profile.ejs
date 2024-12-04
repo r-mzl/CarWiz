@@ -14,6 +14,7 @@
                         
                         <div class="button-container">
                             <a href="/items/<%= item._id %>" class="btn view-btn">View</a>
+                            <a href="/items/<%= item._id %>/offers" class="btn offer-btn">Offers</a>
                             <a href="/items/<%= item._id %>/edit" class="btn edit-btn">Edit</a>
                             <form action="/items/<%= item._id %>?_method=DELETE" method="POST" class="inline-form">
                                 <button type="submit" class="btn delete-btn">Delete</button>
