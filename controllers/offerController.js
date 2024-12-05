@@ -81,36 +81,43 @@ exports.getOffers = (req, res, next) => {
 
 
 exports.acceptOffer = (req, res, next) => {
-    let id = req.params.id; 
+    const itemId = req.params.id; // Item ID from the route
+    const offerId = req.body.offerId; // Offer ID from the form body
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        req.flash('error', 'Invalid offer ID');
-        return res.redirect('back');
-    }
-
-    Offer.findById(id)
-        .populate({
-            path: 'item',
-            populate: { path: 'seller' }
-        })
+    Offer.findById(offerId)
         .then(offer => {
             if (!offer) {
                 req.flash('error', 'Offer not found');
                 return res.redirect('back');
             }
 
-            return Item.findById(offer.item).then(item => {
-                if (item.seller.toString() !== req.user._id.toString()) {
-                    req.flash('error', 'Access denied');
+            if (offer.status !== 'pending') {
+                req.flash('error', 'This offer has already been processed.');
+                return res.redirect('back');
+            }
+
+            return Item.findById(itemId).then(item => {
+                if (!item) {
+                    req.flash('error', 'Item not found');
                     return res.redirect('back');
                 }
 
-                offer.status = 'accepted';
-                return offer.save().then(() => {
-                    req.flash('success', 'Offer accepted');
+                offer.status = 'accepted'; 
+                item.active = false; 
+
+               
+                return Promise.all([
+                    offer.save(),
+                    Item.updateOne({ _id: itemId }, { active: false }),
+                    Offer.updateMany(
+                        { item: itemId, _id: { $ne: offerId } },
+                        { $set: { status: 'rejected' } }
+                    )
+                ]).then(() => {
+                    req.flash('success', 'Offer accepted, item marked as inactive, and other offers rejected.');
                     res.redirect(`/items/${item._id}/offers`);
                 });
             });
         })
-        .catch(err => next(err));
+        .catch(next);
 };

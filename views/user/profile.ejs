@@ -10,7 +10,17 @@
                 <div class="item-tileP">
                     <div class="item-details">
                         <p><strong>Title:</strong> <%= item.year%> <%= item.make%> <%= item.modelX%></p>
-                        <p><strong>Status:</strong> <%= item.active ? "Active" : "Inactive" %></p>
+                         <p><strong>Status:</strong> 
+                                <% if (item.active) { %>
+                                    Active
+                                <% } else { %>
+                                    <% if (item.offers && item.offers.some(offer => offer.status === 'accepted')) { %>
+                                        Accepted
+                                    <% } else { %>
+                                        Inactive
+                                    <% } %>
+                                <% } %>
+                            </p>
                         
                         <div class="button-container">
                             <a href="/items/<%= item._id %>" class="btn view-btn">View</a>

@@ -19,11 +19,14 @@
                 <p>Condition: <%= item.condition %></p>
                 <p>Price: $<%= item.price %></p>
                 <p>Details: <%= item.details %></p>
-
-                <!-- Display the total offers and highest offer if the item is active and has offers -->
-                <% if (item.active && item.totalOffers > 0) { %>
-                    <p><strong>Total Offers:</strong> <%= item.totalOffers %></p>
-                    <p><strong>Highest Offer:</strong> $<%= item.highestOffer %></p>
+                
+                <% if (!item.active) { %>
+                    <p class="text-danger"><strong>This item is no longer available.</strong></p>
+                <% } else { %>
+                    <% if (item.totalOffers > 0) { %>
+                        <p><strong>Total Offers:</strong> <%= item.totalOffers %></p>
+                        <p><strong>Highest Offer:</strong> $<%= item.highestOffer %></p>
+                    <% } %>
                 <% } %>
 
                 <% if (user == item.seller._id) { %>
@@ -32,13 +35,17 @@
                         <button type="submit" formmethod="POST" formaction="/items/<%= item.id %>?_method=DELETE">Delete</button>
                     </form>
                 <% } else { %>
-                    <div class="new-form">
-                        <form action="/items/<%= item._id %>/offers" method="POST">
-                            <label for="offerAmount" class="label">Your Offer ($):</label>
-                            <input type="number" id="offerAmount" name="amount" class="input" placeholder="Enter your offer" min="0.01" step="0.01" required>
-                            <input type="submit" value="Make Offer" class="btn view-btn">
-                        </form>
-                    </div>
+                    <% if (item.active) { %>
+                        <div class="new-form">
+                            <form action="/items/<%= item._id %>/offers" method="POST">
+                                <label for="offerAmount" class="label">Your Offer ($):</label>
+                                <input type="number" id="offerAmount" name="amount" class="input" placeholder="Enter your offer" min="0.01" step="0.01" required>
+                                <input type="submit" value="Make Offer" class="btn view-btn">
+                            </form>
+                        </div>
+                    <% } else { %>
+                        <p class="text-muted">Offers are no longer accepted for this item.</p>
+                    <% } %>
                 <% } %>
             </div>
         </div>

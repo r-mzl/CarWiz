@@ -1,4 +1,5 @@
 const ItemModel = require('../models/item');
+const Offer = require('../models/offer');
 
 exports.index = (req, res, next) => {
     const searchQuery = req.query.search;
@@ -122,12 +123,20 @@ exports.update = (req, res, next)=>{
 };
 
 exports.delete = (req, res, next) => {
-    let id = req.params.id;
+    const id = req.params.id;
 
     ItemModel.findByIdAndDelete(id)
-    .then(item => {
-        res.redirect('/items'); 
-    })
-    .catch(err => next(err));
-};
+        .then(item => {
+            if (!item) {
+                req.flash('error', 'Item not found');
+                return res.redirect('/items');
+            }
 
+            // Delete all offers associated with the item
+            return Offer.deleteMany({ item: id }).then(() => {
+                req.flash('success', 'Item and associated offers deleted successfully');
+                res.redirect('/items');
+            });
+        })
+        .catch(err => next(err));
+};

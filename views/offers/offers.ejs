@@ -12,9 +12,21 @@
                     <div class="item-details">
                         <p><strong>Bid Price:</strong> $<%= offer.amount %></p>
                         <p><strong>Buyer:</strong> <%= offer.user.firstName %> <%= offer.user.lastName %></p> 
-                        <div class="button-container">
-                            <a href="/offers/<%= offer._id %>" class="btn view-btn">Accept</a>
-                        </div>
+                        <p>
+                            <strong>Status:</strong> 
+                            <% if (offer.status === 'accepted') { %>
+                                <span class="status accepted">Accepted</span>
+                            <% } else if (offer.status === 'rejected') { %>
+                                <span class="status rejected">Rejected</span>
+                            <% } else { %>
+                                <span class="status pending">Pending</span>
+                            <% } %>
+                        </p>
+                        <% if (item.active && offer.status === 'pending') { %>
+                        <form action="/items/<%= item._id %>/offers/accept" method="POST">
+                            <input type="hidden" name="offerId" value="<%= offer._id %>">
+                            <button type="submit" class="btn accept-btn">Accept</button>
+                        </form> <% } %>
                     </div>
                 </div>
             <% }); %>
