@@ -29,22 +29,26 @@
                     <% } %>
                 <% } %>
 
-                <% if (user == item.seller._id) { %>
+                <% if (user && user._id == item.seller._id) { %>
                     <form>
                         <button type="submit" formmethod="GET" formaction="/items/<%= item.id %>/edit">Edit</button>
                         <button type="submit" formmethod="POST" formaction="/items/<%= item.id %>?_method=DELETE">Delete</button>
                     </form>
                 <% } else { %>
-                    <% if (item.active) { %>
-                        <div class="new-form">
-                            <form action="/items/<%= item._id %>/offers" method="POST">
-                                <label for="offerAmount" class="label">Your Offer ($):</label>
-                                <input type="number" id="offerAmount" name="amount" class="input" placeholder="Enter your offer" min="0.01" step="0.01" required>
-                                <input type="submit" value="Make Offer" class="btn view-btn">
-                            </form>
-                        </div>
+                    <% if (user) { %>
+                        <% if (item.active) { %>
+                            <div class="new-form">
+                                <form action="/items/<%= item._id %>/offers" method="POST">
+                                    <label for="offerAmount" class="label">Your Offer ($):</label>
+                                    <input type="number" id="offerAmount" name="amount" class="input" placeholder="Enter your offer" min="0.01" step="0.01" required>
+                                    <input type="submit" value="Make Offer" class="btn view-btn">
+                                </form>
+                            </div>
+                        <% } else { %>
+                            <p class="text-muted">Offers are no longer accepted for this item.</p>
+                        <% } %>
                     <% } else { %>
-                        <p class="text-muted">Offers are no longer accepted for this item.</p>
+                        <p class="text-muted">You need to be logged in to make an offer.</p>
                     <% } %>
                 <% } %>
             </div>

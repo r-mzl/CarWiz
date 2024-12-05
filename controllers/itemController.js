@@ -131,8 +131,6 @@ exports.delete = (req, res, next) => {
                 req.flash('error', 'Item not found');
                 return res.redirect('/items');
             }
-
-            // Delete all offers associated with the item
             return Offer.deleteMany({ item: id }).then(() => {
                 req.flash('success', 'Item and associated offers deleted successfully');
                 res.redirect('/items');
